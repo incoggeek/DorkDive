@@ -12,6 +12,7 @@ DorkDive is a Google Dorking tool designed for tech enthusiasts and cybersecurit
    ```bash
    git clone https://github.com/incoggeek/DorkDive.git
    cd DorkDive
+pip3 install -r requirements.txt
    ```
 
 2. **Run the DorkDive Script:**
