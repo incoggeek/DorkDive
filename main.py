@@ -35,7 +35,7 @@ def get_numeric_choice():
         user_choice = input("Choice >> ")
 
         # Check if numeric or not
-        if not user_choice.isdigit():
+        if not user_choice.isdigit() or int(user_choice) >=4:
            print("invalid")
         else:
             return int(user_choice)
