@@ -1,6 +1,6 @@
 # DorkDive 🕵️‍♂️🔍
 
-DorkDive is a Google Dorking tool designed for enthusiasts and cybersecurity geeks to explore the web's hidden corners with precision.
+DorkDive is a Google Dorking tool designed for tech enthusiasts and cybersecurity geeks to explore the web's hidden corners with precision.
 
 ## Features 🚀
 - **Live Dork Extraction:** It enables you to extract the latest Google Dorks from the GHDB website
