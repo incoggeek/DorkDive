@@ -18,6 +18,8 @@ DorkDive is a Google Dorking tool designed for tech enthusiasts and cybersecurit
    ```bash
    python3 main.py
    ```
+## Tool Demonstration 🎥
+[![Tool Demo Video](https://img.youtube.com/vi/wpqa9vdQVRQ/0.jpg)](https://www.youtube.com/watch?v=wpqa9vdQVRQ&ab_channel=Incoggeek)
 
 ## Disclaimer 🔒
 Use responsibly, respecting privacy, and adhering to ethical guidelines. Happy Dorking! 🌐🔍 #GoogleDorking #CyberSecTool
