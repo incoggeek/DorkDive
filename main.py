@@ -1,4 +1,5 @@
-import time
+import requests, time
+from bs4 import BeautifulSoup as bsoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from art import tprint
@@ -7,6 +8,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
+# One-liner dorking
+def one_liner_dork(resp):
+    soup = bsoup(resp.text, 'html.parser')
+    links = soup.findAll("div", { "class" : "yuRUbf" })
+    for link in links:
+        print(f"[+] {link.find('a').get('href')}")
+
+
 # Live google dorks extraction from GHDB site
 def live_dorks_extract(table_rows):
     for row in table_rows:
@@ -14,31 +24,10 @@ def live_dorks_extract(table_rows):
         links = link_td.find_elements(By.TAG_NAME, "a")
 
         for link in links:
-            print(f"-> {link.get_attribute('innerText')}")
+            print(f"[+] {link.get_attribute('innerText')}")
 
 
-# Click the "Next" button and repeat the process for the next pages
-# while True:
-#     try:
-#         next_button = WebDriverWait(driver, 10).until(
-#         EC.element_to_be_clickable((By.CLASS_NAME, "page-link"))
-#         )
-#         print("Next button is interactable:", next_button.is_enabled())
-
-#         next_button.click()
-
-#         time.sleep(2)  # Adjust this sleep time based on your page load time
-
-#         table_rows = driver.find_elements(By.XPATH, "//table[@id='exploits-table']/tbody/tr")
-#         live_dorks_extract(table_rows)
-
-#     except Exception as e:
-#         print(e)
-#         break
-
-    # Close the WebDriver
-    driver.quit()
-
+# Dorking with file
 def upload_dorks_file(file,search_box):
 
     try:
@@ -47,7 +36,7 @@ def upload_dorks_file(file,search_box):
              for line in file:
 
                 # Passing file's text line by line to search box
-                search_box.send_keys(line)
+                search_box.send_keys(line.strip())
 
                  # Simulate pressing the Enter key to perform the search
                 search_box.send_keys(Keys.RETURN)
@@ -59,7 +48,30 @@ def upload_dorks_file(file,search_box):
                 search_results = driver.find_elements(By.TAG_NAME,"cite")
 
                 for link in search_results:
-                    print(f"-> {link.get_attribute('innerText')}")
+                    print(f"[+] {link.text.strip()}")
+                
+        # # Click the "Next" button and repeat the process for the next pages
+        # while True:
+        #     try:
+
+        #         next_button = WebDriverWait(driver, 20).until(
+        #         EC.f((By.CLASS_NAME, "//*[@id='botstuff']/div/div[3]/div[4]/a[1]"))
+        #         )
+        #         print("Next button is interactable:", next_button.is_enabled())
+
+        #         next_button.click()
+
+        #         time.sleep(2)  # Adjust this sleep time based on your page load time
+
+        #         # Capture the search results
+        #         search_results = driver.find_elements(By.TAG_NAME,"cite")
+        #         for link in search_results:
+        #             print(f"[+] {link.get_attribute('innerText')}")
+
+
+        #     except Exception as e:
+        #         print(e)
+        #         break
 
         # Close the browser window
         driver.quit()
@@ -71,9 +83,8 @@ def upload_dorks_file(file,search_box):
         print(f"An error occurred: {str(e)}")
 
 
-
 if __name__ == "__main__":
-
+    
     tprint('DorkDive')
     print('\tv1.0')
     print('\tBy incoggeek')
@@ -88,9 +99,11 @@ if __name__ == "__main__":
     chrome_options.add_argument("--log-level=3")
     driver = webdriver.Chrome(options=chrome_options)
 
+    print("1. Live Dorks Extraction \n2. One-liner Dorking \n3. WithFile Dorking")
+
     opt = int(input("\nChoose an option: "))
-    
-    if opt ==1:
+
+    if opt == 1:
         
         # Establishing connection and crawling webpage
         driver.get("https://www.exploit-db.com/google-hacking-database/")
@@ -103,7 +116,18 @@ if __name__ == "__main__":
     
     elif opt == 2:
 
-        # Establishing connection and crawling webpage
+        query = input("Enter a dork: ")
+        base_url = 'https://www.google.com/search'
+        headers  = { 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0' }
+        params   = { 'q': query, 'start': 10}
+
+        resp = requests.get(base_url, params=params, headers=headers)
+        one_liner_dork(resp)
+
+    
+    elif opt == 3:
+
+        # Establishing connection to search dorks
         driver.get("https://www.google.com/")
 
         # 5 Second delay to load the site properly
@@ -113,9 +137,7 @@ if __name__ == "__main__":
         file = input("Enter the path to the file: ")
         
         # Search box
-        google_search_box = driver.find_element(By.XPATH,"//*[@id='APjFqb']")
-        upload_dorks_file(file,google_search_box)
+        one_liner_dork_box = driver.find_element(By.XPATH,"//*[@id='APjFqb']")
+        upload_dorks_file(file,one_liner_dork_box)
     else:
         print("Invalid options")
-
-        
