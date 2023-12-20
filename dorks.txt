@@ -1,1 +1,5 @@
+allintitle: "index of/admin"
 intitle:"Index of" intext:"php" site:*.com.*
+intitle:index of db.py
+filetype:log inurl:"password.log"
+allintitle:*.php?filename=*

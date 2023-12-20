@@ -1,2 +1,4 @@
 selenium
 art
+beautifulsoup4
+fake_useragent
