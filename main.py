@@ -7,7 +7,7 @@ from art import tprint
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
 
-# One-liner dorking
+# Google Dorking
 def start_dorking(resp):
     if resp.status_code == 200:
         soup = bsoup(resp.text, 'html.parser')
@@ -30,13 +30,14 @@ def live_dorks_extract(table_rows):
         for link in links:
             print(f"[+] {link.get_attribute('innerText')}")
 
+# To Avoid entering unwanted inputs
 def get_numeric_choice():
     while True:
         user_choice = input("Choice >> ")
 
         # Check if numeric or not
         if not user_choice.isdigit() or int(user_choice) >=4:
-           print("invalid")
+           print("Invalid Choice")
         else:
             return int(user_choice)
 
@@ -75,8 +76,15 @@ if __name__ == "__main__":
             table_rows = driver.find_elements(By.XPATH, "//table[@id='exploits-table']/tbody/tr")
             live_dorks_extract(table_rows)
         
-        except (requests.exceptions.RequestException, WebDriverException, KeyboardInterrupt) :
-            print("Something went wrong!")
+        except requests.exceptions.RequestException:
+                print("\nPlease Check your internet connection!")
+                
+        except WebDriverException:
+            print("\nSomething wrong with web driver!")
+        
+        except KeyboardInterrupt:
+            print("\nOh, Okay! ")
+            exit()
 
     
     elif opt == 2:
@@ -93,8 +101,15 @@ if __name__ == "__main__":
             resp = requests.get(base_url, params=params, headers=headers)
             start_dorking(resp)
 
-        except (requests.exceptions.RequestException, KeyboardInterrupt):
-            print("Something went wrong!")
+        except requests.exceptions.RequestException:
+                print("\nPlease Check your internet connection!")
+                
+        except WebDriverException:
+            print("\nSomething wrong with web driver!")
+        
+        except KeyboardInterrupt:
+            print("\nOh, Okay! ")
+            exit()
 
     
     elif opt == 3:
@@ -107,7 +122,8 @@ if __name__ == "__main__":
             with open(file, 'r') as file:
                 for dork in file:
                     base_url = 'https://www.google.com/search'
-                    headers  = { 'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36' }
+                    user_agent = UserAgent().random
+                    headers  = { 'User-Agent': user_agent}
                     params   = { 'q': dork, 'start': page * 10}
 
                     # To avoid too many requests
@@ -116,5 +132,15 @@ if __name__ == "__main__":
                     resp = requests.get(base_url, params=params, headers=headers)
                     start_dorking(resp)
         
-        except (requests.exceptions.RequestException, FileNotFoundError, KeyboardInterrupt):
-            print("Something went wrong!")
+        except requests.exceptions.RequestException:
+                print("\nPlease Check your internet connection!")
+                
+        except WebDriverException:
+            print("\nSomething wrong with web driver!")
+        
+        except FileNotFoundError:
+            print("\nFile not found!")
+        
+        except KeyboardInterrupt:
+            print("\nOh, Okay :)")
+            exit()
