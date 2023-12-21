@@ -14,6 +14,11 @@ def start_dorking(resp):
         links = soup.findAll("div", { "class" : "yuRUbf" })
         for link in links:
             print(f"[+] {link.find('a').get('href')}")
+
+            # To save output in a file
+            with open("Saved_Links.txt", 'a') as f:
+                f.write(f"{link.find('a').get('href')}\n")
+                
     else:
         print("-"*50)
         print(f"HTTP Response code: {resp.status_code}")
@@ -96,7 +101,7 @@ if __name__ == "__main__":
             user_agent = UserAgent().random
             base_url = 'https://www.google.com/search'
             headers  = {'User-Agent': user_agent}
-            params   = { 'q': dork_query, 'start': page * 10}
+            params   = { 'q': dork_query, 'start': page * 10, 'num':100}
 
             resp = requests.get(base_url, params=params, headers=headers)
             start_dorking(resp)
@@ -124,7 +129,7 @@ if __name__ == "__main__":
                     base_url = 'https://www.google.com/search'
                     user_agent = UserAgent().random
                     headers  = { 'User-Agent': user_agent}
-                    params   = { 'q': dork, 'start': page * 10}
+                    params   = { 'q': dork, 'start': page * 10, 'num':100}
 
                     # To avoid too many requests
                     time.sleep(5)
