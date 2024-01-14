@@ -28,6 +28,7 @@ def start_dorking(resp):
 
 # Live google dorks extraction from GHDB site
 def live_dorks_extract(table_rows):
+    print("\nLatest Google Dorks From GHDB\n")
     for row in table_rows:
         link_td = row.find_element(By.XPATH, ".//td[2]")  
         links = link_td.find_elements(By.TAG_NAME, "a")
@@ -91,6 +92,9 @@ if __name__ == "__main__":
             print("\nOh, Okay! ")
             exit()
 
+        except Exception as e:
+            print(e)
+
     
     elif opt == 2:
 
@@ -98,23 +102,30 @@ if __name__ == "__main__":
 
             dork_query = input("Enter a dork >>> ")
             page = int(input("Page No. >>> "))
+            
+            # Session reuse to avoid too many requests
             user_agent = UserAgent().random
+            session = requests.Session()
+
             base_url = 'https://www.google.com/search'
             headers  = {'User-Agent': user_agent}
-            params   = { 'q': dork_query, 'start': page * 10, 'num':100}
+            params   = { 'q': dork_query.strip(), 'start': page * 10, 'num':100}
 
-            resp = requests.get(base_url, params=params, headers=headers)
+            resp = session.get(base_url, params=params, headers=headers)
             start_dorking(resp)
 
         except requests.exceptions.RequestException:
-                print("\nPlease Check your internet connection!")
+                print("\n[i] Please Check your internet connection!")
                 
         except WebDriverException:
-            print("\nSomething wrong with web driver!")
+            print("\n[!] Something wrong with web driver!")
         
         except KeyboardInterrupt:
             print("\nOh, Okay! ")
             exit()
+
+        except Exception as e:
+            print(e)
 
     
     elif opt == 3:
@@ -123,29 +134,39 @@ if __name__ == "__main__":
             # Establishing connection to search dorks
             file = input("Enter filepath >>> ")
             page = int(input("Enter page >>> "))
+            target = input("Enter target domain >> ")
+    
 
             with open(file, 'r') as file:
                 for dork in file:
-                    base_url = 'https://www.google.com/search'
+
+                    # To avoid too many requests
+                    session = requests.Session()
                     user_agent = UserAgent().random
+
+                    base_url = 'https://www.google.com/search'
                     headers  = { 'User-Agent': user_agent}
-                    params   = { 'q': dork, 'start': page * 10, 'num':100}
+                    params   = { 'q': dork.replace("site:domain",f"site:{target}"), 'start': page * 10, 'num':100}
 
                     # To avoid too many requests
                     time.sleep(5)
                     # Response of the web server
-                    resp = requests.get(base_url, params=params, headers=headers)
+                    resp = session.get(base_url, params=params, headers=headers)
                     start_dorking(resp)
         
         except requests.exceptions.RequestException:
-                print("\nPlease Check your internet connection!")
+                print("\n[i] Please Check your internet connection!")
                 
         except WebDriverException:
-            print("\nSomething wrong with web driver!")
+            print("\n[!] Something wrong with web driver!")
         
         except FileNotFoundError:
-            print("\nFile not found!")
+            print("\n[!] File not found!")
         
         except KeyboardInterrupt:
             print("\nOh, Okay :)")
             exit()
+
+        except Exception as e:
+            print(e)
+

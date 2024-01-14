@@ -1,5 +1,14 @@
-allintitle: "index of/admin"
-intitle:"Index of" intext:"php" site:*.com.*
-intitle:index of db.py
-filetype:log inurl:"password.log"
-allintitle:*.php?filename=*
+site:domain -www
+site:domain filetype:txt intitle:index
+site:domain ip
+site:domain -www filetype:xml inurl:/META-INFsite:domain inurl:/phpinfo.php
+site:domain inurl:/phpinfo.php
+site:domain inurl:login
+site:domain filetype:env
+site:domain filetype:sql intext:password
+site:domain intitle:"Index of" confidential
+site:domain inurl:upload
+site:domain filetype:doc OR filetype:pdf OR filetype:ppt
+site:domain filetype:ini
+site:domain intitle:"Index of" intext:"shell"
+site:domain intext:"error" intitle:"500 Internal Server Error"
