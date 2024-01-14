@@ -146,7 +146,7 @@ if __name__ == "__main__":
 
                     base_url = 'https://www.google.com/search'
                     headers  = { 'User-Agent': user_agent}
-                    params   = { 'q': dork.replace("site:domain",f"site:{target}"), 'start': page * 10, 'num':100}
+                    params   = { 'q': dork.replace("site:{DOMAIN_HERE}",f"site:{target}"), 'start': page * 10, 'num':100}
 
                     # To avoid too many requests
                     time.sleep(5)

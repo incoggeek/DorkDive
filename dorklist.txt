@@ -1,14 +1,14 @@
-site:domain -www
-site:domain filetype:txt intitle:index
-site:domain ip
-site:domain -www filetype:xml inurl:/META-INFsite:domain inurl:/phpinfo.php
-site:domain inurl:/phpinfo.php
-site:domain inurl:login
-site:domain filetype:env
-site:domain filetype:sql intext:password
-site:domain intitle:"Index of" confidential
-site:domain inurl:upload
-site:domain filetype:doc OR filetype:pdf OR filetype:ppt
-site:domain filetype:ini
-site:domain intitle:"Index of" intext:"shell"
-site:domain intext:"error" intitle:"500 Internal Server Error"
+site:{DOMAIN_HERE} -www
+site:{DOMAIN_HERE} filetype:txt intitle:index
+site:{DOMAIN_HERE} ip
+site:{DOMAIN_HERE} -www filetype:xml inurl:/META-INFsite:{DOMAIN_HERE} inurl:/phpinfo.php
+site:{DOMAIN_HERE} inurl:/phpinfo.php
+site:{DOMAIN_HERE} inurl:login
+site:{DOMAIN_HERE} filetype:env
+site:{DOMAIN_HERE} filetype:sql intext:password
+site:{DOMAIN_HERE} intitle:"Index of" confidential
+site:{DOMAIN_HERE} inurl:upload
+site:{DOMAIN_HERE} filetype:doc OR filetype:pdf OR filetype:ppt
+site:{DOMAIN_HERE} filetype:ini
+site:{DOMAIN_HERE} intitle:"Index of" intext:"shell"
+site:{DOMAIN_HERE} intext:"error" intitle:"500 Internal Server Error"
