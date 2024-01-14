@@ -51,7 +51,8 @@ if __name__ == "__main__":
     
     tprint('DorkDive')
     print('\tv1.0')
-    print('\tBy incoggeek')
+    print('\tBy incoggeek\n\nGithub: https://github.com/incoggeek')
+
     print('-'*50)
 
     print("1. Live Dorks Extraction \n2. One-liner Dorking \n3. WithFile Dorking")
