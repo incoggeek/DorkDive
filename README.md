@@ -41,7 +41,7 @@ Please ensure that your pull request adheres to the following guidelines:
 - Document any changes to the README.md
 
 ## Tool Demonstration 🎥
-[![Tool Demo Video](https://img.youtube.com/vi/wpqa9vdQVRQ/0.jpg)](https://www.youtube.com/watch?v=wpqa9vdQVRQ&ab_channel=Incoggeek)
+[![DorkDive](https://asciinema.org/a/631461.svg)](https://asciinema.org/a/631461)
 ## Self Troubleshooting 😵‍💫
 - [Selenium Web Driver](https://www.selenium.dev/documentation/webdriver/troubleshooting/)
 - [HTTP Codes Documention](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)
