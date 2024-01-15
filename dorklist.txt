@@ -1,14 +1,26 @@
-site:{DOMAIN_HERE} -www
-site:{DOMAIN_HERE} filetype:txt intitle:index
-site:{DOMAIN_HERE} ip
-site:{DOMAIN_HERE} -www filetype:xml inurl:/META-INFsite:{DOMAIN_HERE} inurl:/phpinfo.php
-site:{DOMAIN_HERE} inurl:/phpinfo.php
-site:{DOMAIN_HERE} inurl:login
-site:{DOMAIN_HERE} filetype:env
-site:{DOMAIN_HERE} filetype:sql intext:password
-site:{DOMAIN_HERE} intitle:"Index of" confidential
-site:{DOMAIN_HERE} inurl:upload
-site:{DOMAIN_HERE} filetype:doc OR filetype:pdf OR filetype:ppt
-site:{DOMAIN_HERE} filetype:ini
-site:{DOMAIN_HERE} intitle:"Index of" intext:"shell"
-site:{DOMAIN_HERE} intext:"error" intitle:"500 Internal Server Error"
+filetype:env
+filetype:sql intext:password
+intitle:"Index of" confidential
+inurl:upload
+filetype:doc OR filetype:pdf OR filetype:ppt
+filetype:ini
+intitle:"Index of" intext:"shell"
+intext:"error" intitle:"500 Internal Server Error"
+intext:"user" filetype:php intext:"account" inurl:/admin
+-www
+filetype:txt intitle:index
+ip
+www filetype:xml inurl:/META-INF inurl:/phpinfo.php
+inurl:/phpinfo.php
+inurl:login
+inurl:"?url=http"
+intitle:"Fleet Management Portal"
+site:.com "index of docker"
+intext:"userfiles" intitle:"Index Of" site:*.com.*
+intitle:"Index of" intext:"php" site:*.com.*
+intitle:"Index of" intext:"config" site:*.com.*
+intext:"index of" app
+inurl:"UserLogin/" intitle:"Panel"
+intitle:index of db.py
+allintitle:"code-server login"
+intext:"administrator" filetype:txt intext:"account" inurl:/admin , intext:"administrator" filetype:txt
