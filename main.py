@@ -113,7 +113,7 @@ if __name__ == "__main__":
             exit()
 
         except Exception as e:
-            mydesign.red_text(e)
+            mydesign.red_text(str(e))
 
     
     elif opt == 2:
@@ -147,7 +147,7 @@ if __name__ == "__main__":
             exit()
 
         except Exception as e:
-            mydesign.red_text(e)
+            mydesign.red_text(str(e))
 
     
     elif opt == 3:
@@ -192,5 +192,5 @@ if __name__ == "__main__":
             exit()
 
         except Exception as e:
-            mydesign.red_text(e)
+            mydesign.red_text(str(e))
 
