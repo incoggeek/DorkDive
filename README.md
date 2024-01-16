@@ -1,3 +1,5 @@
+![DorkDive logo](https://github.com/incoggeek/DorkDive/assets/104693696/37121de5-8b93-4157-856d-7f10d20bc13a)
+
 # DorkDive 🕵️‍♂️🔍
 
 DorkDive is a Google Dorking tool designed for tech enthusiasts and cybersecurity geeks to explore the web's hidden corners with precision.
