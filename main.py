@@ -6,6 +6,8 @@ from selenium.webdriver.chrome.options import Options
 from art import tprint
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
+import time, random
+
 
 # Google Dorking
 def start_dorking(resp):
@@ -68,30 +70,56 @@ def get_numeric_choice():
             return int(user_choice)
 
 if __name__ == "__main__":
+
+    # Create a ChromeOptions object
+    chrome_options = Options()
+
+    # Add the `--headless` argument to enable headless mode
+    chrome_options.add_argument("--headless")
+
+    # Add the argument to disable logging of console messages
+    chrome_options.add_argument("--log-level=3")
+    driver = webdriver.Chrome(options=chrome_options)
+            
+    # Establishing connection and crawling webpage
+    # driver.get("https://free.proxy-sale.com/en/")
+
+    # table_rows = driver.find_elements(By.XPATH, '//*[@id="root"]/div[1]/main/div[1]/div/div/div/div/div[1]')
+    # list = []
+
+    # for row in table_rows:
+    #     link_td = row.find_elements(By.CLASS_NAME, "css-c524v5") 
+
+    #     for _ in link_td:
+
+    #         # Define a regular expression pattern for matching IP addresses
+    #         pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
+
+    #         # Find all matches of IP addresses in the data
+    #         ip_addresses = re.findall(pattern, _.text)
+
+    #         # Append the extracted IP addresses
+    #         for ip in ip_addresses:
+    #             list.append(ip)
+        
+    #     print(list)
+
     
     tprint('DorkDive')
     print('\tv1.1')
     mydesign.cyan_text('\tBy incoggeek\n\nGithub: https://github.com/incoggeek')
 
     mydesign.green_text('-'*50)
-    print("1. Live Dorks Extraction \n2. One-liner Dorking \n3. WithFile Dorking")
+    print("1. Live Dorks Extraction \n2. One-liner Dorking \n3. Custom Dorking")
     mydesign.green_text('-'*50)
     opt = get_numeric_choice()
+
+
 
     if opt == 1:
 
         try:
 
-            # Create a ChromeOptions object
-            chrome_options = Options()
-
-            # Add the `--headless` argument to enable headless mode
-            chrome_options.add_argument("--headless")
-
-            # Add the argument to disable logging of console messages
-            chrome_options.add_argument("--log-level=3")
-            driver = webdriver.Chrome(options=chrome_options)
-            
             # Establishing connection and crawling webpage
             driver.get("https://www.exploit-db.com/google-hacking-database/")
 
@@ -101,6 +129,7 @@ if __name__ == "__main__":
             # Extract data from the first page
             table_rows = driver.find_elements(By.XPATH, "//table[@id='exploits-table']/tbody/tr")
             live_dorks_extract(table_rows)
+
         
         except requests.exceptions.RequestException:
             mydesign.yellow_text("\n[i] Please Check your internet connection!")
