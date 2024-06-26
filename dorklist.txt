@@ -8,6 +8,7 @@ intitle:"Index of" intext:"shell"
 intext:"error" intitle:"500 Internal Server Error"
 intext:"user" filetype:php intext:"account" inurl:/admin
 -www
+intext:"userfiles" intitle:"Index Of" site:*.com.*
 filetype:txt intitle:index
 ip
 www filetype:xml inurl:/META-INF inurl:/phpinfo.php

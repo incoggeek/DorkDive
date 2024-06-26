@@ -6,9 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from art import tprint
 from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.by import By
-import time, random
-
-
+ 
 # Google Dorking
 def start_dorking(resp):
     if resp.status_code == 200:
@@ -71,6 +69,26 @@ def get_numeric_choice():
 
 if __name__ == "__main__":
 
+    # Get the list of proxies from the API
+    response = requests.get('https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&proxy_format=protocolipport&format=text')
+
+    # Check if the request was successful
+    if response.status_code == 200:
+    # Split the response text into a list of proxies
+        proxy_list = response.text.strip().split('\n')
+        
+        # Create a dictionary to store the proxies
+        proxies_dict = {}
+        # Parse each proxy and add to the dictionary with the same address as key and value
+        for proxy in proxy_list:
+            proxy = proxy.strip()  # Remove any leading/trailing whitespace
+            if proxy:
+                # Use the same address for key and value
+                proxies_dict[proxy] = proxy
+    
+    else:
+        print(f"Failed to retrieve proxies: {response.status_code}")
+
     # Create a ChromeOptions object
     chrome_options = Options()
 
@@ -80,30 +98,8 @@ if __name__ == "__main__":
     # Add the argument to disable logging of console messages
     chrome_options.add_argument("--log-level=3")
     driver = webdriver.Chrome(options=chrome_options)
-            
-    # Establishing connection and crawling webpage
-    # driver.get("https://free.proxy-sale.com/en/")
 
-    # table_rows = driver.find_elements(By.XPATH, '//*[@id="root"]/div[1]/main/div[1]/div/div/div/div/div[1]')
-    # list = []
-
-    # for row in table_rows:
-    #     link_td = row.find_elements(By.CLASS_NAME, "css-c524v5") 
-
-    #     for _ in link_td:
-
-    #         # Define a regular expression pattern for matching IP addresses
-    #         pattern = r'\b(?:\d{1,3}\.){3}\d{1,3}\b'
-
-    #         # Find all matches of IP addresses in the data
-    #         ip_addresses = re.findall(pattern, _.text)
-
-    #         # Append the extracted IP addresses
-    #         for ip in ip_addresses:
-    #             list.append(ip)
-        
-    #     print(list)
-
+    # Tool Banner
     
     tprint('DorkDive')
     print('\tv1.1')
@@ -113,7 +109,6 @@ if __name__ == "__main__":
     print("1. Live Dorks Extraction \n2. One-liner Dorking \n3. Custom Dorking")
     mydesign.green_text('-'*50)
     opt = get_numeric_choice()
-
 
 
     if opt == 1:
@@ -152,9 +147,8 @@ if __name__ == "__main__":
             dork_query = input("Enter a dork >>> ")
             page = int(input("Page No. >>> "))
             
-            # Session reuse to avoid too many requests
+            # \To avoid too many requests
             user_agent = UserAgent().random
-            session = requests.Session()
 
             base_url = 'https://www.google.com/search'
             headers  = {'User-Agent': user_agent}
@@ -162,7 +156,7 @@ if __name__ == "__main__":
 
             # To avoid too many requests
             time.sleep(10)
-            resp = session.get(base_url, params=params, headers=headers)
+            resp = requests.get(base_url, params=params, headers=headers,proxies=proxies_dict)
             start_dorking(resp)
 
         except requests.exceptions.RequestException:
@@ -192,7 +186,6 @@ if __name__ == "__main__":
                 for dork in file:
 
                     # To avoid too many requests
-                    session = requests.Session()
                     user_agent = UserAgent().random
                     dork_query = dork_builder(dork,target)
 
@@ -207,7 +200,7 @@ if __name__ == "__main__":
                     # To avoid too many requests
                     time.sleep(10)
                     # Response of the web server
-                    resp = session.get(base_url, params=params, headers=headers)
+                    resp = requests.get(base_url, params=params, headers=headers,proxies=proxies_dict)
                     start_dorking(resp)
         
         except requests.exceptions.RequestException:
